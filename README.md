@@ -41,7 +41,7 @@ Subject is guided to imagine left/right arms and leg motions by flashing indicat
 
 ### Control session 
 
-Control interface during the movement of the robot manipulator was also developed on PyGame Python. This mainly needed for checking which action where determined and selected by the classification and was send to the robot. So we could easily check if robot performing correct movement. 
+To control the device run ```controlInterface.py``` script. It will initialize everything up and control session begins if BCI buffer is already gathering data. In the figure (A) below control interface can be seen. Each row of this 4x2 grid is control variant such that first row is x-axis control, second row is y-axis control, third row is z-axis control and fourth row is gripper control. Left column (-) of the grid corresponds to left arm motor imagery and right column (+) of the grid corresponds to right arm motor imagery. Legs motor imagery is used for changing control variants sequentially such like: x -> y -> z -> g -> z -> y -> x -> y ... by ```ControlUpdater``` class. In case of subsequent "Legs class" prediction, the class blocks changing control variant for 2 seconds, to prevent accidential update.
 
 <p align="center"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/control_interface.jpg" width="70%"> 
