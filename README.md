@@ -44,7 +44,7 @@ Subject is guided to imagine left/right arms and leg motions by flashing indicat
 Control interface during the movement of the robot manipulator was also developed on PyGame Python. This mainly needed for checking which action where determined and selected by the classification and was send to the robot. So we could easily check if robot performing correct movement. 
 
 <p align="center"> 
-<img src="https://writelatex.s3.amazonaws.com/wndkfttkbxvm/uploads/5738..; width="70%"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/control_interface.jpg" width="70%"> 
 <br> 
 <i>A) Control interface displaying active axes B) 3D model of the UR5 robot with gripper indicating axis directions</i> 
 </p> 
