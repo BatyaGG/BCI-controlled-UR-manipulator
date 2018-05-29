@@ -9,14 +9,12 @@ from PygameButton import PygameButton
 from deleteModule import delete_module
 from ControlUpdater import ControlUpdater
 from BatyaGGPreprocessor import BatyaGGPreprocessor
-from ClassUpdater import ClassUpdater
-from PredefinedUpdater import PredefinedUpdater
 from pygame import mixer
 
 mixer.init()
 pygame.init()
-# game_display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-game_display = pygame.display.set_mode((800, 600))
+game_display = pygame.display.set_mode((0, 0), pygame.FULLSCREEN) # full screen mode
+# game_display = pygame.display.set_mode((800, 600)) # specified resolution mode
 info_object = pygame.display.Info()
 width = info_object.current_w
 height = info_object.current_h
@@ -47,28 +45,21 @@ PygameButton(game_display, right_arm_g, (0, 0, 255), font, "    O", (255, 255, 2
 finish_button = PygameButton(game_display, finish_button_position, (255, 0, 0), font, "Finish", (255, 255, 255))
 pygame.display.update()
 crashed = False
-#directory = max(glob.glob('*'), key=os.path.getctime)
-directory = 'Naur_data'
+# directory = max(glob.glob('*'), key=os.path.getctime) # path to last modified folder
+directory = 'Your model directory name' # hard coded path to trained model
 with open(directory + '/Data.pickle', 'rb') as handle:
     rows_per_epoch = pickle.load(handle)['X'].shape[0]
 with open(directory + '/Model.pickle', 'rb') as handle:
     clf = pickle.load(handle)
-clf.zero_thresh = 0.5
-# bci = BCI()
-# prp = BatyaGGPreprocessor(rows_per_epoch)
-# class_updater = ClassUpdater(4)
-class_updater = PredefinedUpdater(1)
-current_class = class_updater.get_next()
-
-# recent_data = prp.fit_test(bci.get_recent_data(rows_per_epoch))
-# current_class = clf.predict(recent_data)
-time.sleep(20)
-control_variants = ['x', 'y', 'z', 'g']
-control_updater = ControlUpdater(control_variants)
+# clf.zero_thresh = 0.5 # this classifier parameter can be changed during control stage
+bci = BCI()
+prp = BatyaGGPreprocessor(rows_per_epoch)
+recent_data = prp.fit_test(bci.get_recent_data(rows_per_epoch))
+current_class = clf.predict(recent_data)
+control_updater = ControlUpdater(['x', 'y', 'z', 'g'])
 current_control = control_updater.get_next()
 ur = UR()
 ur.go_home()
-start_time = time.time()
 mixer.music.load('x_axis.mp3')
 mixer.music.play()
 while not crashed:
@@ -260,10 +251,8 @@ while not crashed:
         ur.move_backward(current_control)
     elif current_class == 2:
         ur.move_forward(current_control)
-    # recent_data = prp.fit_test(bci.get_recent_data(rows_per_epoch))
-    # current_class = clf.predict(recent_data)
-    current_class = class_updater.get_next()
-    # print current_class
+    recent_data = prp.fit_test(bci.get_recent_data(rows_per_epoch))
+    current_class = clf.predict(recent_data)
 pygame.quit()
 try:
     delete_module("mainInterface")
