@@ -61,3 +61,5 @@ The raw dataset is linearly detrended at the beginning stage using scipy.signal:
 <p align="center"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/detrend_1.PNG">
 </p> 
+
+where _y<sub>t</sub>_ is acquired data point, _f(t)_ is a linear trend component and _s<sub>t</sub>_ is useful signal. To determine _f(t)_ slope $\hat{a}$ and shift $\hat{b}$ should be determined by least-squares fit.
