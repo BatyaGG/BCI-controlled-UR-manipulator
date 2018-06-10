@@ -59,5 +59,5 @@ In (B) part of the above figure, UR5 robot manipulator with indicated on gripper
 The raw dataset is linearly detrended at the beginning stage using scipy.signal::detrend function channel-wise. Linear detrending is crucial since decreasing impedance between scalp and electrode and gel drying cause linear trend in data. However, the information is contained in change tendencies in the sampled data and its behavior. The data points are considered as sum of signal and linear trend.
 
 <p align="center"> 
-<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/detrend_1.PNG" width="70%">
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/detrend_1.PNG">
 </p> 
