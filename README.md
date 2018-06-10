@@ -118,3 +118,10 @@ and the Welch expected value estimate of the power spectral density is given by:
 </p>
 E.g the equation above defines the average of periodograms across time.
 Finally, desired frequency band can be simply sliced from the Welch power spectrum estimation array.
+
+### Signal Classification
+The purpose of the learning algorithm is to resolve 4 class problem, where 1, 2 and 3 labels determines left arm, right arm and leg imagery classes and 0 label determines rest class. At training session, 0 class occurs between any 2 consecutive imagery flashes, where subject have to rest and try to think about nothing. However, \textit{thinking of nothing} may generate different signals case by case. In order to clarify that, standard deviations and mean values of all 0 class observations were calculated feature-wise of preprocessed data acquired from a particular subject.
+
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/zero_class.PNG">
+</p>
