@@ -84,7 +84,7 @@ Where _n_ is a number of channels. For performance reasons each epoch/observatio
 #### Bad channel removal
 Probably some channels have bad connection having excessive noise coming from improper connection of electrode or poor contact with scalp. Excessive powered channels are detected by computing global average and standard deviation across all channels.
 
-<p align="center"> 
+<p align="left"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/bad_channel.PNG">
 </p>
 
@@ -93,7 +93,7 @@ Channels having power of more than three standard deviations from global average
 #### Bad trial removal
 Epoch artifacts were removed as well using similar as bad channel removal process, but across all observations. Excessive powered trials are detected by computing global average and standard deviation across all epochs.
 
-<p align="center"> 
+<p align="left"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/bad_trial.PNG">
 </p>
 
