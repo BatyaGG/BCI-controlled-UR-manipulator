@@ -53,3 +53,6 @@ In (B) part of the above figure, UR5 robot manipulator with indicated on gripper
 
 ## Explanation report
 
+### Signal Processing
+
+#### Signal Detrending
