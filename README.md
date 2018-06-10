@@ -124,22 +124,24 @@ The purpose of the learning algorithm is to resolve 4 class problem, where 1, 2 
 
 <p align="center"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/zero_class.png" width="70%">
-Figure: Mean and standard deviation feature space analysis of 0 class
+<br>
+<i>Figure: Mean and standard deviation feature space analysis of 0 class</i>
 </p>
 
 It is clear that standard deviation of numerous features is certainly high with respect to mean value, so in general having large relative error. Therefore, including 0 class at algorithm training session may degenerate the classification accuracy of the system. To resolve the given problem, classifier is trained without 0 class data, basically fitting 3 class problem. This classifier is called "Imagery Classifier" and basically is a soft voting classifier containing 6 different learning algorithms: Support-Vector Classifier, Logistic Regression, AdaBoost Classifier, Gradient Boosting Classifier, Random Forest Classifier and Extra Trees Classifier. 
 
 <p align="center"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/model.png" width="70%">
-Figure: Imagery Classifier
+<br>
+<i>Figure: Imagery Classifier</i>
 </p>
 
 All observations of 0 label in preprocessed data are removed and applied to Voting algorithm, which trains all 6 component classifiers on the same given data. Regularization terms of Support-Vector Classifier and Logistic Regression algorithms are tuned on the fly, however other algorithms parameters are set to fixed values empirically. Class probabilities returned by component classifiers are averaged and class with highest averaged confidence score is returned in hard predictions. 
 
 <p align="center"> 
 <img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/prediction.png" width="70%">
-
-Figure: Prediction pipeline, where T is zeroThreshold parameter value
+<br>
+<i>Figure: Prediction pipeline, where T is zeroThreshold parameter value</i>
 </p>
 
 In order to restore 0 class in prediction of new observation, several new custom parameters were introduced: _zeroThreshold_ and _zeroTolerance_. Soft predictions with highest confidence score less than _zeroThreshold_ are considered as 0 class. The default value for _zeroThreshold_ is 0.1, which is obviously not enough. The tuning algorithm performs soft predictions on training data (containing 0 class) again using current _zeroThreshold_ argument. The algorithm compares number of predicted and actual 0 labels, and in case the absolute difference between these values is less than _zeroTolerance_ argument, the algorithm stops iteration and stores _zeroThreshold_ to the model. Also, _zeroThreshold_ determines the sensitivity of the full model.
