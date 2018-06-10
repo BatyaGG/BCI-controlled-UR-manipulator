@@ -131,7 +131,7 @@ The purpose of the learning algorithm is to resolve 4 class problem, where 1, 2 
 It is clear that standard deviation of numerous features is certainly high with respect to mean value, so in general having large relative error. Therefore, including 0 class at algorithm training session may degenerate the classification accuracy of the system. To resolve the given problem, classifier is trained without 0 class data, basically fitting 3 class problem. This classifier is called "Imagery Classifier" and basically is a soft voting classifier containing 6 different learning algorithms: Support-Vector Classifier, Logistic Regression, AdaBoost Classifier, Gradient Boosting Classifier, Random Forest Classifier and Extra Trees Classifier. 
 
 <p align="center"> 
-<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/model.png" width="70%">
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/model.png" width="40%">
 <br>
 <i>Figure: Imagery Classifier</i>
 </p>
