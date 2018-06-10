@@ -55,6 +55,8 @@ In (B) part of the above figure, UR5 robot manipulator with indicated on gripper
 
 ### Signal Processing
 
+Each channel signal samples are filtered in time and frequency fomains before applying model training/testing even in real time. Filtering techniques are explained order by order.
+
 #### Signal Detrending
 The raw dataset is linearly detrended at the beginning stage using scipy.signal::detrend function channel-wise. Linear detrending is crucial since decreasing impedance between scalp and electrode and gel drying cause linear trend in data. However, the information is contained in change tendencies in the sampled data and its behavior. The data points are considered as sum of signal and linear trend.
 
@@ -69,3 +71,12 @@ where _y<sub>t</sub>_ is acquired data point, _f(t)_ is a linear trend component
 </p> 
 
 by minimization of the equation above.
+
+#### Spatial Filtering
+Source mixing and volume conduction effects increases noise in EEG data. To minimize such effects a Common-Average Reference (CAR) filtering is applied, which is subtraction of the mean of all channels from each sample. The filter maps the data to a new space of less correlated channels with unit power. 
+
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/car_1.PNG">
+</p>
+
+Where _n_ is a number of channels. For performance reasons each epoch/observation matrix is multiplied by _CAR_ matrix instead of computing channel means per each sample per each epoch in order to translate data to common averaged space. The shape of _CAR_ is 16X16 in particular case, in general n_channels X n_channels.
