@@ -123,21 +123,22 @@ Finally, desired frequency band can be simply sliced from the Welch power spectr
 The purpose of the learning algorithm is to resolve 4 class problem, where 1, 2 and 3 labels determines left arm, right arm and leg imagery classes and 0 label determines rest class. At training session, 0 class occurs between any 2 consecutive imagery flashes, where subject have to rest and try to think about nothing. However, \textit{thinking of nothing} may generate different signals case by case. In order to clarify that, standard deviations and mean values of all 0 class observations were calculated feature-wise of preprocessed data acquired from a particular subject.
 
 <p align="center"> 
-<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/zero_class.png">
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/zero_class.png" width="70%">
 Figure: Mean and standard deviation feature space analysis of 0 class
 </p>
 
 It is clear that standard deviation of numerous features is certainly high with respect to mean value, so in general having large relative error. Therefore, including 0 class at algorithm training session may degenerate the classification accuracy of the system. To resolve the given problem, classifier is trained without 0 class data, basically fitting 3 class problem. This classifier is called "Imagery Classifier" and basically is a soft voting classifier containing 6 different learning algorithms: Support-Vector Classifier, Logistic Regression, AdaBoost Classifier, Gradient Boosting Classifier, Random Forest Classifier and Extra Trees Classifier. 
 
 <p align="center"> 
-<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/model.png">
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/model.png" width="70%">
 Figure: Imagery Classifier
 </p>
 
 All observations of 0 label in preprocessed data are removed and applied to Voting algorithm, which trains all 6 component classifiers on the same given data. Regularization terms of Support-Vector Classifier and Logistic Regression algorithms are tuned on the fly, however other algorithms parameters are set to fixed values empirically. Class probabilities returned by component classifiers are averaged and class with highest averaged confidence score is returned in hard predictions. 
 
 <p align="center"> 
-<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/prediction.png">
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/prediction.png" width="70%">
+
 Figure: Prediction pipeline, where T is zeroThreshold parameter value
 </p>
 
