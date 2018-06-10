@@ -80,3 +80,41 @@ Source mixing and volume conduction effects increases noise in EEG data. To mini
 </p>
 
 Where _n_ is a number of channels. For performance reasons each epoch/observation matrix is multiplied by _CAR_ matrix instead of computing channel means per each sample per each epoch in order to translate data to common averaged space. The shape of _CAR_ is 16X16 in particular case, in general n_channels X n_channels.
+
+#### Bad channel removal
+Probably some channels have bad connection having excessive noise coming from improper connection of electrode or poor contact with scalp. Excessive powered channels are detected by computing global average and standard deviation across all channels.
+
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/bad_channel.PNG">
+</p>
+
+Channels having power of more than three standard deviations from global average are considered as bad channels and translated to CAR space.
+
+#### Bad trial removal
+Epoch artifacts were removed as well using similar as bad channel removal process, but across all observations. Excessive powered trials are detected by computing global average and standard deviation across all epochs.
+
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/bad_trial.PNG">
+</p>
+
+Global observation mean and standard deviations were computed and trials with more than three standard deviations are removed from the dataset as well as from training label array.
+
+#### Band-pass filtering
+Welch's method is based on exploiting periodogram expected spectrum, in order to map the time series signal from time domain to frequency domain. The method is improved version of Bartlett's method which was previously used for signal noise reduction by reducing resolution of frequency. Time series of each channel is divided to windows of equal length and forming periodogram for each window block, averaging at the end.
+
+The _m<sub>th</sub>_ windowed, zero-padded frame from the signal _x_ is denoted by:
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/band-pass.PNG">
+</p>
+
+where _R_ denotes the window hop size and _K_ denotes the number of available frames. So, periodogram of the _m<sub>th</sub>_ window block is given by:
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/band-pass_2.PNG">
+</p>
+
+and the Welch expected value estimate of the power spectral density is given by:
+<p align="center"> 
+<img src="https://github.com/BatyaGG/BCI-controlled-UR-manipulator/blob/master/images/band-pass_3.PNG">
+</p>
+E.g the equation above defines the average of periodograms across time.
+Finally, desired frequency band can be simply sliced from the Welch power spectrum estimation array.
