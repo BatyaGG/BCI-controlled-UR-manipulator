@@ -9,7 +9,7 @@ Python efficient implementation of robotic system consisting of motor imagery no
 The signal is preprocessed, translated to frequency domain and band-pass filtered. Preprocessed data is trained and classified by soft voting ensemble model, which includes state-of-art EEG classification models as well as boosting and decision tree based algorithms. Such ensemble classification approach was not previously exploited in BCI control architectures, and usually consisted of only one linear model such as Support-Vector Machines or Linear Regression models. Scenario experiments were provided in order to prove reliability of proposed system on 7 healthy subject. The experimental results shown that the proposed architecture is a potential paradigm to be used in a real world situations by disabled people and could be a state-of-art design to be improved in future. Also, experiments shown that several control sessions leads to further supervision improvement leading to smooth and relaxed execution of tasks, due to experience gain by subjects. Please take a look on robot control session captured video. 
 
 <p align="center"> 
-<a href="https://www.youtube.com/watch?v=BMP_HQ0vaPo" target="_blank"><img src="https://raw.githubusercontent.com/BatyaGG/BCI-controlled-UR-manipulator/master/images/youtube.png" 
+<a href="https://www.youtube.com/watch?v=sGMzB3wyXN8" target="_blank"><img src="https://raw.githubusercontent.com/BatyaGG/BCI-controlled-UR-manipulator/master/images/youtube.png" 
 width="70%"" border="10" /></a> 
 <br> 
 <i>The demo video</i> 
